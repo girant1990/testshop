@@ -185,4 +185,6 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'pagination_items_count' => env('PAGINATION_ITEMS_COUNT', 12),
+
 ];

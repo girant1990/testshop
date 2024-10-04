@@ -1,7 +1,12 @@
-.card {
-    min-width: 300px;
+.card-div {
     border: 1px solid #4b5563;
     border-radius: 16px;
     box-shadow: 4px 4px 4px #4b5563;
     min-height: 200px;
+}
+
+.content {
+    display: flex;
+    gap: 8px;
+    padding: 16px;
 }

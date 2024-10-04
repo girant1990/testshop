@@ -26,7 +26,16 @@ class ItemsRepository extends BaseRepository
                 $this->query()->where($key, $condition);
             }
         }
-        return $this->query()->get();
+        return $this->query()->paginate(10);
+    }
+
+    public function getPaginated($perPage = null) {
+        $query = $this->query();
+        if (!$perPage) {
+            $perPage = config('app.pagination_items_count');
+        }
+
+        return $query->paginate($perPage);
     }
 
     public function create(array $attributes): bool

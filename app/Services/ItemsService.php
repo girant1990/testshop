@@ -11,6 +11,6 @@ class ItemsService
     }
 
     public function getAllItems() {
-        return $this->itemsRepository->get();
+        return $this->itemsRepository->getPaginated();
     }
 }

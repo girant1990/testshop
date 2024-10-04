@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Repositories\ItemsRepository;
+use App\Services\ItemsService;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -10,9 +12,9 @@ class ItemController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, ItemsService $service)
     {
-        //
+        return view('welcome', ['items' => $service->getAllItems()]);
     }
 
     /**

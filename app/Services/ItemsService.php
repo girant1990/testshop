@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\ItemsRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ItemsService
 {
@@ -10,7 +11,7 @@ class ItemsService
     {
     }
 
-    public function getAllItems() {
+    public function getAllItems(): LengthAwarePaginator {
         return $this->itemsRepository->getPaginated();
     }
 }

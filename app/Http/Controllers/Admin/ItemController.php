@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Item;
-use App\Repositories\ItemsRepository;
 use App\Services\ItemsService;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class ItemController extends Controller
      */
     public function index(Request $request, ItemsService $service)
     {
-        return view('welcome', ['items' => $service->getAllItems()]);
+        return view('layouts.items.index', ['items' => $service->getAllItems()]);
     }
 
     public function getItemsData(Request $request, ItemsService $service)

@@ -5,7 +5,12 @@
  */
 
 import axios from 'axios';
+import {TDataTable} from "./utils";
+
+window.DataTable = DataTable;
+window.init = init;
 window.axios = axios;
+window.TDataTable = new TDataTable();
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 

@@ -23,7 +23,7 @@
                 </ul>
                 <div class="navbar-text">
                     @auth
-                        <a href="{{ url('/admin/items') }}">Admin panel</a>
+                        <a href="{{ url('/dashboard') }}">Dashboard</a>
                     @else
                         <a href="{{ route('login') }}">Log in</a>
 
@@ -37,24 +37,17 @@
     </nav>
 @endif
 <div class="content">
-    @if(isset($items))
-        <div class="row m-0 gap-4 justify-content-between align-items-center">
-            @foreach($items as $item)
-                @include('components.card', [
-                    'name'  => $item->name,
-                    'count' => $item->count,
-                    'cost'  => $item->price,
-                ]
-            )
-            @endforeach
-            {{ $items->links() }}
-            @else
-                <div>{{__('main.no data')}}</div>
-            @endif
-        </div>
+    <input id="collection" type="hidden" data-collection = '{{$items}}'>
+    <div class="datatable-div w-100" data-url="items/data" id="items-table"></div>
+    {{$items->links('components.custom.pagination')}}
 </div>
+<script>
+    let collection = {!! \Illuminate\Support\Collection::make($items->items()) !!}
+</script>
 <script src="{{ mix('js/app.js') }}"></script>
 <script src="{{ mix('js/utils.js') }}"></script>
+<script src="{{ mix('js/datatables.js') }}"></script>
+<script src="{{ mix('js/pagination.js') }}"></script>
 <script defer src="{{ mix('js/items/items.js') }}"></script>
 
 </body>

@@ -19,12 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ItemController::class, 'index'])->name('home');
 Route::prefix('admin/items')->middleware(IsAdmin::class)->group(function () {
-    Route::get('', [AdminItemController::class, 'index']);
+    Route::get('', [AdminItemController::class, 'index'])->name('item.index');
+    Route::get('/create', [AdminItemController::class, 'create'])->name('item.create');
+    Route::post('', [AdminItemController::class, 'store'])->name('item.store');
     Route::get('data', [AdminItemController::class, 'getItemsData']);
-    Route::post('', [AdminItemController::class, 'store']);
     Route::get('{item}', [AdminItemController::class, 'showItem']);
-    Route::patch('{item}', [AdminItemController::class, 'updateItem']);
-    Route::delete('{item}', [AdminItemController::class, 'deleteItem']);
+    Route::get('{item}/edit', [AdminItemController::class, 'edit']);
+    Route::patch('{item}', [AdminItemController::class, 'update'])->name('item.update');
+    Route::delete('{item}', [AdminItemController::class, 'destroy'])->name('item.delete');
 });
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -14,7 +14,7 @@ class ItemController extends Controller
      */
     public function index(Request $request, ItemsService $service)
     {
-        return view('welcome', ['items' => $service->getAllItems()]);
+        return view('layouts.user.welcome', ['items' => $service->getAllItems()]);
     }
 
     public function getItemsData(Request $request, ItemsService $service)

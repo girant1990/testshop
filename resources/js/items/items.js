@@ -21,21 +21,28 @@ $(document).ready(function () {
             name: 'options',
             width: 100,
             template: function (row) {
-                return `<a href="/items/${row['id']}/edit">Edit</a>&nbsp;<a style="color: red" href="/items/${row['id']}/delete">Delete</a>`
+                return `<a class="btn btn-warning btn-sm" href="/admin/items/${row['id']}/edit">Edit</a>&nbsp;
+                           <button class="btn btn-danger btn-sm"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#confirmDeleteModal"
+                                    data-bs-link="/admin/items/${row['id']}/"
+                                    type="button" >Delete</button>
+`
             }
         }
 
     ]
 
-    datatable = window.TDataTable.initDatatable($('#items-table'), columns);
+    datatable = tdataTable.initDatatable($('#items-table'), columns);
     initListeners();
 });
 
 function initListeners() {
-/*    $('.navigate-to').on('click', function (event) {
-        event.preventDefault();
-        let page = this.text;
-        datatable.refreshDatatable(page);
-    })*/
+    $('#confirmDeleteModal').on('show.bs.modal', function(event) {
+        let btn = event.relatedTarget;
+        let url = $(btn).data('bs-link');
+        $('#deleteForm').attr('action', url);
+    })
+
 }
 

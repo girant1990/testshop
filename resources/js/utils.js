@@ -8,9 +8,9 @@ export class TDataTable {
         this.columns = columns;
         this.element = element;
         let url = element.data('url') + '?page=' + this.page;
-        let table = "<table class='table'><tbody><tr>";
+        let table = "<table class='table align-middle'><tbody><tr>";
         columns.forEach( (column) => {
-            table += '<th>' + column.name + '</th>';
+            table += '<th class="text-center" scope="col">' + column.name + '</th>';
         })
         table += "</tr>";
         if (type === 'local-data') {
@@ -53,9 +53,9 @@ export class TDataTable {
             this.table += '<tr>';
             this.columns.forEach((col) => {
                 if (col.template) {
-                    table += '<td>' + col.template(item) + '</td>';
+                    table += '<td class="text-center">' + col.template(item) + '</td>';
                 } else {
-                    table += '<td>' + item[col.name] + '</td>';
+                    table += '<td class="text-center">' + item[col.name] + '</td>';
                 }
             })
             table += '</tr>';

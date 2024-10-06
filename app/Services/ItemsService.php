@@ -14,4 +14,8 @@ class ItemsService
     public function getAllItems(): LengthAwarePaginator {
         return $this->itemsRepository->getPaginated();
     }
+
+    public function create($attrinutes) {
+        return ($this->itemsRepository->create($attrinutes));
+    }
 }

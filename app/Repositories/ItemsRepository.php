@@ -31,7 +31,7 @@ class ItemsRepository extends BaseRepository
     }
 
     public function getPaginated($perPage = null): LengthAwarePaginator {
-        $query = $this->query();
+        $query = $this->query()->orderBy('id', 'desc');
         if (!$perPage) {
             $perPage = config('app.pagination_items_count');
         }
@@ -41,7 +41,13 @@ class ItemsRepository extends BaseRepository
 
     public function create(array $attributes): bool
     {
-        return true;
+       $item = Item::create([
+            'name' => $attributes['name'],
+            'price' => $attributes['price'],
+            'count' => $attributes['count'],
+        ]);
+
+       return ($item instanceof Item);
     }
 
     public function update(array $attributes, $id): Model
@@ -49,8 +55,20 @@ class ItemsRepository extends BaseRepository
         // TODO: Implement update() method.
     }
 
+    public function updateModel(array $attributes, Item $item): bool
+    {
+        $item->name = $attributes['name'];
+        $item->price = $attributes['price'];
+        $item->count = $attributes['count'];
+        return $item->save();
+    }
+
     public function delete($id): bool
     {
         // TODO: Implement delete() method.
+    }
+
+    public function deleteItem(Item $item) {
+        return $item->delete();
     }
 }

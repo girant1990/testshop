@@ -1,8 +1,15 @@
 .card-div {
-    border: 1px solid #4b5563;
+    border: 1px solid #d6d8d9;
+    transition: 0.3s;
     border-radius: 16px;
-    box-shadow: 4px 4px 4px #4b5563;
+    box-shadow: 1px 1px 6px #7e7f85;
     min-height: 200px;
+}
+
+.card-div:hover {
+    transition: 0.5s;
+    transform: scale(1.05);
+    box-shadow: 4px 4px 8px #7e7f85;
 }
 
 .content {

@@ -30,8 +30,16 @@ class ItemsRepository extends BaseRepository
         return $this->query()->paginate(10);
     }
 
-    public function getPaginated($perPage = null): LengthAwarePaginator {
-        $query = $this->query()->orderBy('id', 'desc');
+    public function getPaginated($from, $to, $perPage = null): LengthAwarePaginator {
+        $query = $this->query();
+        if ($from) {
+            $query->where('price', '>=', $from);
+        }
+        if ($to) {
+            $query->where('price', '<=', $to);
+        }
+
+        $query->orderBy('id', 'desc');
         if (!$perPage) {
             $perPage = config('app.pagination_items_count');
         }

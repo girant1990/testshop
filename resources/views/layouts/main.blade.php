@@ -15,7 +15,7 @@
 @if (Route::has('login'))
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Test shop</a>
+            <a class="navbar-brand" href="/">Test shop</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -26,8 +26,14 @@
                 <div class="navbar-text">
                     @auth
                         <ul class="navbar-nav">
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/admin/items') }}">Admin panel</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('item.index') }}">Admin panel</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('dashboard') }}">Profile</a></li>
+                            <li class="nav-item">
+                                <form class="m-0" action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                <button class="nav-link">Log out</button>
+                                </form>
+                            </li>
                         </ul>
                     @else
                         <a class="nav-link" href="{{ route('login') }}">Log in</a>

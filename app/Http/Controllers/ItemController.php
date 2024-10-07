@@ -14,7 +14,12 @@ class ItemController extends Controller
      */
     public function index(Request $request, ItemsService $service)
     {
-        return view('layouts.user.welcome', ['items' => $service->getAllItems()]);
+        return view('layouts.user.items.index',
+            [
+                'items' => $service->getAllItems($request),
+                'priceFrom' => $request->exists('priceFrom') ? $request->priceFrom : null,
+                'priceTo' => $request->exists('priceTo') ? $request->priceTo : null,
+            ]);
     }
 
     public function getItemsData(Request $request, ItemsService $service)

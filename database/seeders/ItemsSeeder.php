@@ -12,6 +12,8 @@ class ItemsSeeder extends Seeder
      */
     public function run(): void
     {
-        Item::factory()->count(1000)->create();
+        if (Item::count() < 1500000) {
+            Item::factory()->count(1000)->create();
+        }
     }
 }

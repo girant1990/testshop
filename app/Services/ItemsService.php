@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\ItemsRepository;
+use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class ItemsService
@@ -11,8 +12,11 @@ class ItemsService
     {
     }
 
-    public function getAllItems(): LengthAwarePaginator {
-        return $this->itemsRepository->getPaginated();
+    public function getAllItems(Request $request): LengthAwarePaginator {
+
+        $from = $request->exists('priceFrom') ? (double)$request->priceFrom : null;
+        $to = $request->exists('priceTo') ? (double)$request->priceTo : null;
+        return $this->itemsRepository->getPaginated($from, $to);
     }
 
     public function create($attrinutes) {

@@ -17,5 +17,9 @@ return [
     'confirm' => 'Հաստատել',
     'warning' => 'Ուշադրություն',
     'save' => 'Հաստատել',
+    'search' => 'Որոնել',
+    'price from' => 'գին սկսած',
+    'price to' => 'գին մինչև',
     'are you sure you want to delete this item?' => 'Դուք վստա՞հ եք, որ ցանկանում եք ջնջել ապրանքը։',
+    'reset' => 'Մաքրել',
 ];

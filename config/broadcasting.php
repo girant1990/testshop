@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('BROADCAST_DRIVER', 'null'),
+    'default' => env('BROADCAST_DRIVER', 'pusher'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
                 'encrypted' => true,
                 'host' => '127.0.0.1',
                 'port' => env('PUSHER_PORT', 6001),
-                'scheme' => env('PUSHER_SCHEME', 'https'),
+                'scheme' => env('PUSHER_SCHEME', 'http'),
 /*                'useTLS' => env('PUSHER_SCHEME', 'https') === 'https',*/
             ],
             'client_options' => [

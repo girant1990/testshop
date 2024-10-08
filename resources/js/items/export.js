@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $('#btnCsvExport').on('click', function (e) {
-        debugger
         let secret = Date.now().toString(36) + Math.random().toString(36).substr(2);
         window.Cookie.set('localSecretKey', secret, { expires: 365 });
 

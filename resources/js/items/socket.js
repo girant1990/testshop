@@ -2,7 +2,7 @@ let translations = $('#translations')
 $(document).ready(function () {
     Echo.channel('items')
         .listen('ItemUpdatedEvent', (e) => {
-        data = JSON.parse(e.item);
+        data = e.item;
         card = $('#' + data.id);
         if (card.length > 0) {
             data.count === 0 ? card.find('#' + data.id + '_count').text(translations.data('expired')) : card.find('#' + data.id + '_count').text(data.count);

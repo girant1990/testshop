@@ -15,7 +15,7 @@ window.$ = window.jQuery = $;
 window.Cookie = Cookie;
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: 'testshopkey',
+    key: 'key',
     forceTLS: false,
     cluster: 'mt1',
     wsHost: '127.0.0.1',

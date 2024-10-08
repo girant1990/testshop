@@ -22,4 +22,6 @@ return [
     'price to' => 'գին մինչև',
     'are you sure you want to delete this item?' => 'Դուք վստա՞հ եք, որ ցանկանում եք ջնջել ապրանքը։',
     'reset' => 'Մաքրել',
+    'expired' => 'առկա չէ',
+    'export' => 'Արտահանել',
 ];

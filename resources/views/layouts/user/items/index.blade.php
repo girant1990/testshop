@@ -14,6 +14,7 @@
                         {{__('lang.search')}}
                     </button>
                     <a href="{{route('home')}}" type="reset" class="btn btn-danger mb-3">{{__('lang.reset')}}</a>
+                    <button id="btnCsvExport" type="button" class="btn btn-primary mb-3">{{__('lang.export')}}</button>
                 </div>
             </form>
         </div>
@@ -23,7 +24,8 @@
                     @include('components.card', [
                         'name'  => $item->name,
                         'count' => $item->count,
-                        'cost'  => $item->price,
+                        'price'  => $item->price,
+                        'id'    => $item->id,
                     ]
                 )
                 @endforeach
@@ -33,5 +35,28 @@
                 @endif
             </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="downloadCSVModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="downloadCSVModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="downloadCSVModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <a id="downloadLink" href="">Download exported CSV</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="downloadBtnModal" type="button" class="btn btn-primary">Download</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('custom_scripts')
+    <script src="{{ mix('js/items/export.js') }}"></script>
 @endsection
 

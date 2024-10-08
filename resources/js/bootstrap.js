@@ -5,6 +5,7 @@
  */
 
 import axios from 'axios';
+import './js.cookie.min'
 import {popper} from "@popperjs/core";
 
 window.axios = axios;

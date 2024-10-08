@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\ItemUpdatedEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemsCreateUpdateRequest;
 use App\Models\Item;
@@ -16,12 +17,12 @@ class ItemController extends Controller
      */
     public function index(Request $request, ItemsService $service)
     {
-        return view('layouts.admin.items.index', ['items' => $service->getAllItems()]);
+        return view('layouts.admin.items.index', ['items' => $service->getAllItems($request)]);
     }
 
     public function getItemsData(Request $request, ItemsService $service)
     {
-        return response()->json($service->getAllItems());
+        return response()->json($service->getAllItems($request));
     }
 
     /**
@@ -66,6 +67,7 @@ class ItemController extends Controller
     public function update(ItemsCreateUpdateRequest $request, Item $item, ItemsRepository $repository)
     {
         if($repository->updateModel($request->validated(), $item)) {
+            broadcast(new ItemUpdatedEvent($item))->toOthers();
             return redirect()->route('item.index')->with('success', __('lang.Item updated successfully'));
         }
         return redirect()->back()->with('error', __('lang.Something went wrong'));

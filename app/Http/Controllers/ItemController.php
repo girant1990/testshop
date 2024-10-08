@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Repositories\ItemsRepository;
 use App\Services\ItemsService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -24,54 +25,24 @@ class ItemController extends Controller
 
     public function getItemsData(Request $request, ItemsService $service)
     {
-        return response()->json($service->getAllItems());
+        return response()->json($service->getAllItems($request));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function exportCSV(Request $request, ItemsService $service)
     {
-        //
+        $service->exportCSV($request);
+        return true;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function downloadCSV($fileName)
     {
-        //
-    }
+        $filePath = "exports/{$fileName}.csv";
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Item $item)
-    {
-        //
-    }
+        if (Storage::exists('public/' . $filePath)) {
+            return response()->download(public_path() . '/storage/' . $filePath);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Item $item)
-    {
-        //
-    }
+        return response()->with(['error' => 'File not found'], 404);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Item $item)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Item $item)
-    {
-        //
     }
 }

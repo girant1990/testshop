@@ -47,6 +47,20 @@ class ItemsRepository extends BaseRepository
         return $query->paginate($perPage);
     }
 
+    public function getFiltered($from, $to){
+        $query = $this->query();
+        if ($from) {
+            $query->where('price', '>=', $from);
+        }
+        if ($to) {
+            $query->where('price', '<=', $to);
+        }
+
+        $query->orderBy('id', 'desc');
+
+        return $query->get();
+    }
+
     public function create(array $attributes): bool
     {
        $item = Item::create([
